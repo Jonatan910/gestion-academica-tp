@@ -1,0 +1,36 @@
+/*Color para el tema de Bootstrap*/
+.nav-pills .nav-link.active {
+  background-color: #7a1f2b;
+}
+
+.nav-pills .nav-link {
+  color: #7a1f2b;
+}
+
+.nav-pills .nav-link:hover {
+  color: #5a1620;
+}
+
+.bg-institucional {
+  background-color: #7a1f2b;
+}
+
+.bg-institucional .nav-pills .nav-link {
+  color: #fff;
+}
+
+.bg-institucional .nav-pills .nav-link.active {
+  background-color: #fff;
+  color: #7a1f2b;
+}
+
+/* Agregado: sobreescribe el color primario de Bootstrap en todo el sitio (botones btn-primary, etc.) */
+
+.btn-primary {
+  --bs-btn-bg: #7a1f2b;
+  --bs-btn-border-color: #7a1f2b;
+  --bs-btn-hover-bg: #5a1620;
+  --bs-btn-hover-border-color: #5a1620;
+  --bs-btn-active-bg: #5a1620;
+  --bs-btn-active-border-color: #5a1620;
+}
