@@ -23,9 +23,14 @@
   background-color: #fff;
   color: #7a1f2b;
 }
-
-/* Agregado: sobreescribe el color primario de Bootstrap en todo el sitio (botones btn-primary, etc.) */
-
+/* Color de texto institucional */
+.text-bordo { 
+  color: #7a1f2b; 
+}
+/* sobreescribe el color primario de Bootstrap en todo el sitio (botones btn-primary, etc.) */
+.bg-bordo {
+  background-color: #7a1f2b;
+}
 .btn-primary {
   --bs-btn-bg: #7a1f2b;
   --bs-btn-border-color: #7a1f2b;

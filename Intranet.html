@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Carga de Bootstrap e íconos (los mismos que en index.html)-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <title>Intranet - CET N°33</title>
+  <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+
+<body>
+
+  <!-- ===== BARRA SUPERIOR Mantiene el mismo diseño que en index.html ===== -->
+  <header class="navbar bg-institucional text-white px-3 py-2">
+    <a href="intranet.html" class="d-flex align-items-center text-white text-decoration-none">
+      <img src="Imagenes/logomini.png" alt="Logo CET N°33" width="32" class="me-2">
+      <span class="fs-5 fw-bold">Intranet CET N°33</span>
+    </a>
+    <a href="Index.html" class="btn btn-outline-light ms-auto">
+        <i class="bi bi-box-arrow-left me-1"></i>Volver al sitio
+      </a>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- ===== MENÚ LATERAL ===== -->
+      <!-- col-md-3 col-lg-2: el menú ocupa 3 de 12 columnas en tablet y 2 de 12 en PC -->
+      <nav class="col-md-3 col-lg-2 bg-light border-end min-vh-100 p-3">
+        <ul class="nav nav-pills flex-column gap-1">
+          <li class="nav-item">
+            <a href="#" class="nav-link active"><i class="bi bi-people me-2"></i>Estudiantes</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link link-dark"><i class="bi bi-journal-check me-2"></i>Notas</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link link-dark"><i class="bi bi-calendar-check me-2"></i>Asistencia</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link link-dark"><i class="bi bi-envelope me-2"></i>Comunicados</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ===== CONTENIDO PRINCIPAL  ===== -->
+      <!-- =====  es una etiqueta semántica que significa, Visualmente es igual a un <div> ===== -->
+      <main class="col-md-9 col-lg-10 p-4">
+
+        <h1 class="h3 pb-2 border-bottom">Estudiantes</h1>
+
+        <!-- Formulario de carga -->
+        <div class="card my-4">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Cargar estudiante</h2>
+            <form id="formEstudiante" class="row g-3">
+              <div class="col-md-4">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" id="apellido" class="form-control" required>
+              </div>
+              <div class="col-md-4">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" class="form-control" required>
+              </div>
+              <div class="col-md-4">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="number" id="dni" class="form-control" required>
+              </div>
+              <div class="col-md-4">
+                <label for="curso" class="form-label">Curso</label>
+                <select id="curso" class="form-select" required>
+                  <option value="">Elegí un curso...</option>
+                  <option>1° 1° Ciclo Básico</option>
+                  <option>1° 2° Ciclo Básico</option>
+                  <option>1° 3° Ciclo Básico</option>
+                  <option>1° 1° Ciclo Superior</option>
+                  <option>1° 2° Ciclo Superior</option>
+                  <option>1° 3° Ciclo Superior</option>
+                  <!-- sumá el resto de los cursos acá -->
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="turno" class="form-label">Turno</label>
+                <select id="turno" class="form-select" required>
+                  <option value="">Elegí un turno...</option>
+                  <option>Mañana</option>
+                  <option>Tarde</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Agregar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tabla de estudiantes -->
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Curso</th>
+                <th>Turno</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaEstudiantes">
+              <!-- Las filas se van a cargar con JavaScript -->
+              <tr>
+                <td colspan="6" class="text-center text-muted">Todavía no hay estudiantes cargados.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="JS/intranet.js"></script>
+</body>
+
+</html>
