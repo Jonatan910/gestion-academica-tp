@@ -14,26 +14,28 @@
 
 <body>
 
-  <!-- ===== HEADER ===== -->
+  <!-- ===== Sector Menu ===== -->
   <!-- Ese me-md-auto es el que empuja los links de navegación hacia la derecha en pantallas medianas/grandes -->
   <header class="d-flex flex-wrap justify-content-center pt-4 pb-2 border-bottom bg-institucional text-white">
-    <div class="container d-flex flex-wrap justify-content-center align-items-center">
+    <div class="container encabezado-contenido">
       <a href="index.html"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none text-white">
         <img src="imagenes/logomini.png" alt="Logo CET N°33" width="40" class="me-2">
         <span class="fs-4 fw-bold">CET N°33 - MMO</span>
       </a>
-      <ul class="nav nav-pills fw-semibold">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Inicio</a></li>
-        <li class="nav-item"><a href="#oferta" class="nav-link">Oferta Educativa</a></li>
-        <li class="nav-item"><a href="#historia" class="nav-link">Historia</a></li>
-        <li class="nav-item"><a href="#directivos" class="nav-link">Directivos</a></li>
-        <li class="nav-item"><a href="intranet.html" class="nav-link">Intranet</a></li>
-      </ul>
+      <nav aria-label="Navegación principal">
+        <ul class="nav nav-pills fw-semibold menu-principal">
+          <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Inicio</a></li>
+          <li class="nav-item"><a href="index.html#oferta" class="nav-link">Oferta educativa</a></li>
+          <li class="nav-item"><a href="intranet.html" class="nav-link">Intranet</a></li>
+          <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
+  <main>
+  <!-- ===== 1er Sector  ===== -->
   <div class="container">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5"> <!-- Ese g-5 es el espacio (gap)-->
       <div class="col-10 col-sm-8 col-lg-6">
@@ -44,14 +46,14 @@
         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Formamos Maestros Mayores de Obra</h1>
         <p class="lead">Acá va tu bajada sobre la orientación MMO.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Conocer más</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Contacto</button>
+          <a href="#oferta" class="btn btn-primary btn-lg px-4 me-md-2">Conocer más</a>
+          <a href="contacto.html" class="btn btn-outline-secondary btn-lg px-4">Contacto</a>
         </div>
       </div>
     </div> <!-- cierra el row del hero -->
   </div> <!-- cierra el container del hero -->
 
-  <!-- ===== NÚMEROS ===== -->
+  <!-- ===== Cajas con Números ===== -->
   <section class="container py-5">
     <h2 class="pb-2 border-bottom">El CET 33 en números</h2>
     <div class="row g-4 py-4 text-center">
@@ -128,7 +130,7 @@
   <section id="directivos" class="container py-5">
     <h2 class="pb-2 border-bottom">Equipo directivo</h2>
     <!-- 1 card por fila en el celular, 2 en tablet y 3 en PC -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 py-4">
+    <div class="equipo-grid py-4">
 
       <div class="col">
         <div class="card h-100 text-center p-3"> <!-- h-100: todas las cards de una fila con la misma altura -->
@@ -180,8 +182,9 @@
 
     </div>
   </section>
+  </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== Pie de Página ===== -->
   <footer class="bg-bordo text-white pt-5 pb-3 mt-5">
     <div class="container">
       <div class="row g-4">
