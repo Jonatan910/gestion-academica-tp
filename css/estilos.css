@@ -39,3 +39,40 @@
   --bs-btn-active-bg: #5a1620;
   --bs-btn-active-border-color: #5a1620;
 }
+
+/* Mobile First: el encabezado se apila en pantallas pequeñas. */
+.encabezado-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-principal {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .encabezado-contenido {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .equipo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .equipo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
