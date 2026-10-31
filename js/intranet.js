@@ -124,7 +124,217 @@ buscador.addEventListener('input', function () {
   actualizarTabla(filtrados);
 });
 
-// ===== 8. AL CARGAR LA PÁGINA: carga cursos y estudiantes desde datos.json (fetch + async/await) =====
+// ===== 8. NAVEGACIÓN DEL MENÚ LATERAL (evento click) =====
+const enlacesMenu = document.querySelectorAll('[data-seccion]');
+
+enlacesMenu.forEach(enlace => {
+  enlace.addEventListener('click', function (event) {
+    event.preventDefault(); // evita que el link "#" suba la página
+    mostrarSeccion(enlace.dataset.seccion);
+  });
+});
+
+function mostrarSeccion(idSeccion) {
+  // Ocultamos todas las secciones y mostramos solo la elegida
+  document.querySelectorAll('main > section').forEach(s => s.classList.add('d-none'));
+  document.getElementById(idSeccion).classList.remove('d-none');
+
+  // Marcamos como activo solo el link elegido
+  enlacesMenu.forEach(a => {
+    a.classList.remove('active');
+    a.classList.add('link-dark');
+  });
+  const activo = document.querySelector(`[data-seccion="${idSeccion}"]`);
+  activo.classList.add('active');
+  activo.classList.remove('link-dark');
+
+  // Al entrar a Notas, actualizamos los combos con los datos actuales
+  if (idSeccion === 'seccion-notas') {
+    llenarSelectsNotas();
+    actualizarTablaNotas();
+  }
+}
+
+// ===== 9. MATERIAS: alta, listado y eliminación =====
+const formMateria = document.getElementById('formMateria');
+const tablaMaterias = document.getElementById('tablaMaterias');
+let materias = JSON.parse(localStorage.getItem('materias')) || [];
+
+function guardarMaterias() {
+  localStorage.setItem('materias', JSON.stringify(materias));
+}
+
+formMateria.addEventListener('submit', function (event) {
+  event.preventDefault();
+  const nombre = document.getElementById('nombreMateria').value.trim();
+
+  // Validaciones: vacío y repetido (sin importar mayúsculas)
+  if (!nombre) {
+    alert('Escribí el nombre de la materia.');
+    return;
+  }
+  if (materias.some(m => m.nombre.toLowerCase() === nombre.toLowerCase())) {
+    alert('Esa materia ya existe.');
+    return;
+  }
+
+  materias.push({ id: Date.now(), nombre: nombre });
+  guardarMaterias();
+  actualizarTablaMaterias();
+  formMateria.reset();
+});
+
+function actualizarTablaMaterias() {
+  tablaMaterias.innerHTML = '';
+
+  if (materias.length === 0) {
+    tablaMaterias.innerHTML = '<tr><td colspan="2" class="text-center text-muted">No hay materias cargadas.</td></tr>';
+    return;
+  }
+
+  materias.forEach(m => {
+    tablaMaterias.innerHTML += `
+      <tr>
+        <td>${m.nombre}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger" onclick="eliminarMateria(${m.id})">Eliminar</button>
+        </td>
+      </tr>`;
+  });
+}
+
+function eliminarMateria(id) {
+  if (!confirm('¿Eliminar esta materia?')) return;
+  materias = materias.filter(m => m.id !== id);
+  guardarMaterias();
+  actualizarTablaMaterias();
+}
+
+// ===== 10. NOTAS Y PROMEDIOS =====
+const formNota = document.getElementById('formNota');
+const selectNotaEstudiante = document.getElementById('notaEstudiante');
+const selectNotaMateria = document.getElementById('notaMateria');
+const tablaNotas = document.getElementById('tablaNotas');
+const tablaPromedios = document.getElementById('tablaPromedios');
+let notas = JSON.parse(localStorage.getItem('notas')) || [];
+
+function guardarNotas() {
+  localStorage.setItem('notas', JSON.stringify(notas));
+}
+
+// Llena los combos con los estudiantes y materias actuales
+function llenarSelectsNotas() {
+  selectNotaEstudiante.innerHTML = '<option value="">Elegí un estudiante...</option>';
+  estudiantes.forEach(e => {
+    selectNotaEstudiante.innerHTML += `<option value="${e.id}">${e.apellido}, ${e.nombre}</option>`;
+  });
+
+  selectNotaMateria.innerHTML = '<option value="">Elegí una materia...</option>';
+  materias.forEach(m => {
+    selectNotaMateria.innerHTML += `<option value="${m.id}">${m.nombre}</option>`;
+  });
+}
+
+// Promedio de una materia: (nota1 + nota2) / 2
+function calcularPromedio(nota) {
+  return (nota.nota1 + nota.nota2) / 2;
+}
+
+formNota.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const estudianteId = Number(selectNotaEstudiante.value); // el value del select es texto: lo pasamos a número
+  const materiaId = Number(selectNotaMateria.value);
+  const nota1 = parseFloat(document.getElementById('nota1').value);
+  const nota2 = parseFloat(document.getElementById('nota2').value);
+
+  // Validaciones
+  if (!estudianteId || !materiaId) {
+    alert('Elegí un estudiante y una materia.');
+    return;
+  }
+  if (isNaN(nota1) || isNaN(nota2) || nota1 < 1 || nota1 > 10 || nota2 < 1 || nota2 > 10) {
+    alert('Las notas deben ser números entre 1 y 10.');
+    return;
+  }
+
+  // Si ya tiene nota en esa materia, la actualizamos; si no, la agregamos
+  const existente = notas.find(n => n.estudianteId === estudianteId && n.materiaId === materiaId);
+  if (existente) {
+    existente.nota1 = nota1;
+    existente.nota2 = nota2;
+  } else {
+    notas.push({ id: Date.now(), estudianteId, materiaId, nota1, nota2 });
+  }
+
+  guardarNotas();
+  actualizarTablaNotas();
+  formNota.reset();
+});
+
+function actualizarTablaNotas() {
+  tablaNotas.innerHTML = '';
+
+  if (notas.length === 0) {
+    tablaNotas.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No hay notas cargadas.</td></tr>';
+  }
+
+  notas.forEach(n => {
+    // Buscamos nombre del estudiante y de la materia por su id
+    const est = estudiantes.find(e => e.id === n.estudianteId);
+    const mat = materias.find(m => m.id === n.materiaId);
+    const prom = calcularPromedio(n);
+
+    tablaNotas.innerHTML += `
+      <tr>
+        <td>${est ? est.apellido + ', ' + est.nombre : '(estudiante eliminado)'}</td>
+        <td>${mat ? mat.nombre : '(materia eliminada)'}</td>
+        <td>${n.nota1}</td>
+        <td>${n.nota2}</td>
+        <td><span class="badge ${prom >= 6 ? 'bg-success' : 'bg-danger'}">${prom.toFixed(2)}</span></td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger" onclick="eliminarNota(${n.id})">Eliminar</button>
+        </td>
+      </tr>`;
+  });
+
+  actualizarPromedios();
+}
+
+function actualizarPromedios() {
+  tablaPromedios.innerHTML = '';
+  let hayAlguno = false;
+
+  estudiantes.forEach(e => {
+    const susNotas = notas.filter(n => n.estudianteId === e.id); // notas de este estudiante
+    if (susNotas.length === 0) return; // sin notas: no lo mostramos
+
+    // reduce suma todos los promedios por materia; después dividimos por la cantidad
+    const suma = susNotas.reduce((acumulado, n) => acumulado + calcularPromedio(n), 0);
+    const general = suma / susNotas.length;
+    hayAlguno = true;
+
+    tablaPromedios.innerHTML += `
+      <tr>
+        <td>${e.apellido}, ${e.nombre}</td>
+        <td>${susNotas.length}</td>
+        <td><span class="badge ${general >= 6 ? 'bg-success' : 'bg-danger'}">${general.toFixed(2)}</span></td>
+      </tr>`;
+  });
+
+  if (!hayAlguno) {
+    tablaPromedios.innerHTML = '<tr><td colspan="3" class="text-center text-muted">Todavía no hay promedios para mostrar.</td></tr>';
+  }
+}
+
+function eliminarNota(id) {
+  if (!confirm('¿Eliminar esta nota?')) return;
+  notas = notas.filter(n => n.id !== id);
+  guardarNotas();
+  actualizarTablaNotas();
+}
+
+// ===== 11. AL CARGAR LA PÁGINA: carga turnos, cursos, estudiantes y materias desde datos.json (fetch + async/await) =====
 async function obtenerDatos() {
   const response = await fetch('json/datos.json');
   if (!response.ok) throw new Error('Error al cargar los datos: ' + response.statusText);
@@ -156,17 +366,25 @@ async function cargarEstudiantesIniciales() {
     const cursosValidos = datos.cursos.filter(c => c.id && c.nombre);
     mostrarCursos(cursosValidos, datos.turnos);
 
-    // Solo agregamos los estudiantes iniciales si no hay estudiantes en localStorage
+    // Datos iniciales: solo si no hay nada guardado en localStorage
     if (estudiantes.length === 0) {
       estudiantes = datos.estudiantes;
       guardarEstudiantes();
+    }
+    if (Array.isArray(datos.materias) && materias.length === 0) {
+      materias = datos.materias;
+      guardarMaterias();
     }
   } catch (error) {
     console.error(error); // detalle técnico para el programador
     document.getElementById('error').textContent = 'Error al cargar los datos. Por favor, intenta nuevamente más tarde.';
   }
 
-  actualizarTabla(estudiantes); // siempre muestra la tabla al final
+  // Siempre mostramos las tablas al final
+  actualizarTabla(estudiantes);
+  actualizarTablaMaterias();
+  actualizarTablaNotas();
 }
 
+// Arranque: se ejecuta cuando ya están definidas todas las funciones y variables
 cargarEstudiantesIniciales();

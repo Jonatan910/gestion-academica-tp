@@ -32,5 +32,16 @@
     { "id": 8, "apellido": "Fernández", "nombre": "Sofía", "dni": "44890123", "curso": "3° 2° Ciclo Superior" },
     { "id": 9, "apellido": "Ramírez", "nombre": "Diego", "dni": "44901234", "curso": "4° 1° Ciclo Superior" },
     { "id": 10, "apellido": "Torres", "nombre": "Valentina", "dni": "43012345", "curso": "4° 2° Ciclo Superior" }
+  ],
+  "materias": [
+    { "id": 1, "nombre": "Matemática" },
+    { "id": 2, "nombre": "Lengua" },
+    { "id": 3, "nombre": "Física" },
+    { "id": 4, "nombre": "Química" },
+    { "id": 5, "nombre": "Inglés" },
+    { "id": 6, "nombre": "Dibujo Técnico" },
+    { "id": 7, "nombre": "Construcciones" },
+    { "id": 8, "nombre": "Taller" }
   ]
 }
+
