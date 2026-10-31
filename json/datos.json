@@ -1,0 +1,36 @@
+{
+  "turnos": [
+    { "id": 1, "nombre": "Mañana" },
+    { "id": 2, "nombre": "Tarde" }
+  ],
+  "cursos": [
+    { "id": 1, "nombre": "1° 1° Ciclo Básico", "turnoId": 1 },
+    { "id": 2, "nombre": "1° 2° Ciclo Básico", "turnoId": 1 },
+    { "id": 3, "nombre": "1° 3° Ciclo Básico", "turnoId": 1 },
+    { "id": 4, "nombre": "2° 1° Ciclo Básico", "turnoId": 2 },
+    { "id": 5, "nombre": "2° 2° Ciclo Básico", "turnoId": 2 },
+    { "id": 6, "nombre": "2° 3° Ciclo Básico", "turnoId": 2 },
+    { "id": 7, "nombre": "1° 1° Ciclo Superior", "turnoId": 1 },
+    { "id": 8, "nombre": "1° 2° Ciclo Superior", "turnoId": 1 },
+    { "id": 9, "nombre": "1° 3° Ciclo Superior", "turnoId": 1 },
+    { "id": 10, "nombre": "2° 1° Ciclo Superior", "turnoId": 2 },
+    { "id": 11, "nombre": "2° 2° Ciclo Superior", "turnoId": 2 },
+    { "id": 12, "nombre": "3° 1° Ciclo Superior", "turnoId": 1 },
+    { "id": 13, "nombre": "3° 2° Ciclo Superior", "turnoId": 1 },
+    { "id": 14, "nombre": "4° 1° Ciclo Superior", "turnoId": 2 },
+    { "id": 15, "nombre": "4° 2° Ciclo Superior", "turnoId": 2 },
+    { "id": 16, "nombre": "4° 3° Ciclo Superior", "turnoId": 2 }
+  ],
+  "estudiantes": [
+    { "id": 1, "apellido": "Pérez", "nombre": "Juan", "dni": "48123456", "curso": "1° 1° Ciclo Básico" },
+    { "id": 2, "apellido": "Gómez", "nombre": "María", "dni": "48234567", "curso": "1° 2° Ciclo Básico" },
+    { "id": 3, "apellido": "López", "nombre": "Carlos", "dni": "47345678", "curso": "2° 1° Ciclo Básico" },
+    { "id": 4, "apellido": "Martínez", "nombre": "Ana", "dni": "47456789", "curso": "2° 2° Ciclo Básico" },
+    { "id": 5, "apellido": "Rodríguez", "nombre": "Lucas", "dni": "46567890", "curso": "1° 1° Ciclo Superior" },
+    { "id": 6, "apellido": "Sánchez", "nombre": "Laura", "dni": "45678901", "curso": "2° 1° Ciclo Superior" },
+    { "id": 7, "apellido": "García", "nombre": "Pedro", "dni": "45789012", "curso": "3° 1° Ciclo Superior" },
+    { "id": 8, "apellido": "Fernández", "nombre": "Sofía", "dni": "44890123", "curso": "3° 2° Ciclo Superior" },
+    { "id": 9, "apellido": "Ramírez", "nombre": "Diego", "dni": "44901234", "curso": "4° 1° Ciclo Superior" },
+    { "id": 10, "apellido": "Torres", "nombre": "Valentina", "dni": "43012345", "curso": "4° 2° Ciclo Superior" }
+  ]
+}
