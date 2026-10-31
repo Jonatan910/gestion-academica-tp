@@ -40,16 +40,16 @@
       <nav class="col-md-3 col-lg-2 bg-light border-end min-vh-100 p-3" aria-label="Menú de la intranet">
         <ul class="nav nav-pills flex-column gap-1">
           <li class="nav-item">
-            <a href="#" class="nav-link active"><i class="bi bi-people me-2"></i>Estudiantes</a>
+            <a href="#" class="nav-link active" data-seccion="seccion-estudiantes"><i
+                class="bi bi-people me-2"></i>Estudiantes</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link link-dark"><i class="bi bi-journal-check me-2"></i>Notas</a>
+            <a href="#" class="nav-link link-dark" data-seccion="seccion-materias"><i
+                class="bi bi-book me-2"></i>Materias</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link link-dark"><i class="bi bi-calendar-check me-2"></i>Asistencia</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link link-dark"><i class="bi bi-envelope me-2"></i>Comunicados</a>
+            <a href="#" class="nav-link link-dark" data-seccion="seccion-notas"><i
+                class="bi bi-journal-check me-2"></i>Notas</a>
           </li>
         </ul>
       </nav>
@@ -57,70 +57,110 @@
       <!-- ===== CONTENIDO PRINCIPAL ===== -->
       <!-- main: etiqueta semántica para el contenido principal de la página -->
       <main class="col-md-9 col-lg-10 p-4">
-
-        <h1 class="h3 pb-2 border-bottom">Estudiantes</h1>
         <div id="error" class="text-danger fw-semibold"></div>
 
-        <!-- Formulario de carga y edición -->
-        <div class="card my-4">
-          <div class="card-body">
-            <h2 class="h5 mb-3">Cargar estudiante</h2>
-            <form id="formEstudiante" class="row g-3" novalidate>
-              <div class="col-md-4">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" id="apellido" class="form-control" required>
-              </div>
-              <div class="col-md-4">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" class="form-control" required>
-              </div>
-              <div class="col-md-4">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="number" id="dni" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="curso" class="form-label">Curso</label>
-                <select id="curso" class="form-select" required>
-                  <option value="">Cargando cursos...</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <button type="submit" id="btnGuardar" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Agregar </button>
-                <button type="button" id="btnCancelar" class="btn btn-outline-secondary d-none">Cancelar</button>
-                
-                <!-- d-none lo oculta; solo se muestra mientras se edita un estudiante -->
-                <button type="button" id="btnCancelar" class="btn btn-outline-secondary d-none">Cancelar</button>
-              </div>
-            </form>
+        <!-- ===== SECCIÓN ESTUDIANTES ===== -->
+        <section id="seccion-estudiantes">
+          <h1 class="h3 pb-2 border-bottom">Estudiantes</h1>
+
+          <!-- Formulario de carga y edición -->
+          <div class="card my-4">
+            <div class="card-body">
+              <h2 class="h5 mb-3">Cargar estudiante</h2>
+              <form id="formEstudiante" class="row g-3" novalidate>
+                <div class="col-md-4">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input type="text" id="apellido" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" id="nombre" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="dni" class="form-label">DNI</label>
+                  <input type="number" id="dni" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="curso" class="form-label">Curso</label>
+                  <select id="curso" class="form-select" required>
+                    <option value="">Cargando cursos...</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <button type="submit" id="btnGuardar" class="btn btn-primary">
+                    <i class="bi bi-plus-lg me-1"></i>Agregar
+                  </button>
+                  <button type="button" id="btnCancelar" class="btn btn-outline-secondary d-none">Cancelar</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <!-- Buscador de estudiantes -->
-        <input type="search" id="buscador" class="form-control mb-3" placeholder="Buscar por apellido, nombre o DNI...">
+          <!-- Buscador de estudiantes -->
 
-        <!-- Tabla de estudiantes -->
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead>
-              <tr>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th>DNI</th>
-                <th>Curso</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tablaEstudiantes">
-              <!-- Las filas se cargan con JavaScript -->
-              <tr>
-                <td colspan="5" class="text-center text-muted">Todavía no hay estudiantes cargados.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- Buscador de estudiantes -->
+    <input type="search" id="buscador" class="form-control mb-3" placeholder="Buscar por apellido, nombre o DNI...">
 
-      </main>
+    <!-- Tabla de estudiantes -->
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Curso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaEstudiantes">
+          <!-- Las filas se cargan con JavaScript -->
+          <tr>
+            <td colspan="5" class="text-center text-muted">Todavía no hay estudiantes cargados.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    </section>
+    <!-- ===== SECCIÓN MATERIAS ===== -->
+    <section id="seccion-materias" class="d-none">
+      <h1 class="h3 pb-2 border-bottom">Materias</h1>
+
+      <div class="card my-4">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Cargar materia</h2>
+          <form id="formMateria" class="row g-3" novalidate>
+            <div class="col-md-8">
+              <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+              <input type="text" id="nombreMateria" class="form-control" required>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+              <button type="submit" class="btn btn-primary w-100"><i class="bi bi-plus-lg me-1"></i>Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Materia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaMaterias"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN NOTAS (próximo paso) ===== -->
+    <section id="seccion-notas" class="d-none">
+      <h1 class="h3 pb-2 border-bottom">Notas</h1>
+      <p class="text-muted">Próximamente.</p>
+    </section>
+    </main>
+  </div>
   </div>
 
   <footer class="bg-bordo text-white py-3">
